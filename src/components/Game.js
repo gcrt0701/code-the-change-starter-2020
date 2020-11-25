@@ -7,33 +7,46 @@ const Game = () => {
   // TODO: Set up states and functions: position of Xs and Os on board,
   // step number, whether X is next, is there a win or tie, etc.
   //Initiatlizes states [variableName, function] = useState(initialState)
-  const [board, setBoard] = useState([null, null, null, null, null, null, null, null, null]);
+  //const [board, setBoard] = useState(Array(9).fill(null));
+  const [history, setHistory] = useState([Array(9).fill(null)]);
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXisNext] = useState(true);
-  const [className, setClassName] = useState(["squares", "squares", "squares", "squares", "squares", "squares", "squares", "squares", "squares"]);
+  const [className, setClassName] = useState(Array(9).fill("squares"));
 
   //Variables
-  const winner = calculateWinner(board);
+  const winner = calculateWinner(history[stepNumber]);
   const play = xIsNext ? "X" : "O";
 
   //onClick function
   const handleClick = (i) => {
-    if (winner == null && board[i] == null) {
-      board[i] = play;
+    if (winner == null && history[stepNumber][i] == null) {
+      let temp = history[stepNumber].map((x) => x);
+      temp[i] = play;
+
+      if (stepNumber === history.length - 1) {
+        setHistory(history.concat([temp]));
+      } else {
+        let trim = history.slice(0,stepNumber + 1);
+        setHistory(trim.concat([temp]));
+      }
+
+      setStepNumber(stepNumber + 1);
+      
       className[i] = "clicked squares";
       setXisNext(!xIsNext);
-      setStepNumber(stepNumber + 1);
       return ;
     }
   };
 
-  //Resets the game
-  const jumpToStart = () => {
-    setBoard([null, null, null, null, null, null, null, null, null]);
-    setStepNumber(0);
-    setXisNext(true);
-    setClassName(["squares", "squares", "squares", "squares", "squares", "squares", "squares", "squares", "squares"])
-  };
+  const jumpTo = (step) => {
+    setStepNumber(step);
+    if (step % 2 === 0) {
+      setXisNext(true);
+    } else {
+      setXisNext(false);
+    }
+    setClassName(Array(9).fill("squares"));
+  }
 
   //Concludes game
   const result = () => {
@@ -41,7 +54,7 @@ const Game = () => {
       return "Winner: " + winner;
     }
 
-    if (board.indexOf(null) === -1) {
+    if (history[stepNumber].indexOf(null) === -1) {
       return "Tie Game";
     }
 
@@ -49,14 +62,19 @@ const Game = () => {
 
   };
 
+  const renderMoves = () => {
+    return history.map((value, i) => (<button className="history-button" step={i} value={value} onClick={() => jumpTo(i)}>Go to {i === 0 ? "Start" : "Move #" + i}</button>));
+  }
+
 
   return (
     <>
       <h1>Tic Tac Toe</h1>
-      <Board className={className} squares={board} onClick={i => handleClick(i)} />
+      <Board className={className} squares={history[stepNumber]} onClick={i => handleClick(i)} />
       <div className='info-wrapper'>
         <div>
-          <button onClick={() => jumpToStart()}>Go to Start</button>
+          <h3>History</h3>
+          {renderMoves()}
         </div>
         <h3>{result()}</h3>
       </div>

@@ -1,2 +1,0 @@
-@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);*{padding:0;margin:0;box-sizing:border-box}body{background-color:#fff;color:#000;font-family:"Roboto",sans-serif;display:flex;justify-content:center}.board{border:1rem solid #000;background:#000;width:500px;height:500px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);grid-gap:1rem;gap:1rem}.squares{background:#fff;color:#000;border:none;font-size:5rem;cursor:pointer;outline:none}
-/*# sourceMappingURL=main.e70e0b65.chunk.css.map */

@@ -1,2 +1,0 @@
-(this["webpackJsonptic-tac-toe-v1"]=this["webpackJsonptic-tac-toe-v1"]||[]).push([[0],{3:function(t,e,n){t.exports=n(9)},8:function(t,e,n){},9:function(t,e,n){"use strict";n.r(e);var c=n(0),a=n.n(c),r=n(2),o=n.n(r);n(8);var u=function(t){var e=t.value,n=t.onClick;return a.a.createElement("button",{className:"squares",onClick:n}," ",e," ")},i=function(){return a.a.createElement(u,{value:"O",onClick:function(){return{}}})};o.a.render(a.a.createElement(i,null),document.getElementById("root"))}},[[3,1,2]]]);
-//# sourceMappingURL=main.a45eb231.chunk.js.map
