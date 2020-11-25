@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+:root { --style-color: #3171d6; }
+
 * {
   padding: 0;
   margin: 0;
@@ -7,16 +9,17 @@
 }
 
 body {
-  background-color: white;
-  color: black;
+  background-color: var(--style-color);
+  color: white;
   font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
 }
 
 .board {
-  border: 1rem solid black;
-  background: black;
+  border: 1rem solid white;
+  border-radius: 1rem;
+  background: white;
   width: 500px;
   height: 500px;
   display: grid;
@@ -25,6 +28,48 @@ body {
 }
 
 .squares {
+  background: var(--style-color);
+  color :white;
   border: none;
+  border-radius: 0.5rem;
   font-size: 5rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  vertical-align: middle;;
+}
+
+button {
+  border-radius: 1.25rem;
+  padding: 0.5rem;
+  border: 0;
+  color: var(--style-color);
+  font-weight: bolder;
+}
+
+h1 {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.info-wrapper button:hover {
+  background: #bfbfbf;
+}
+
+@keyframes fadeInOpacity {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.clicked{
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
 }
